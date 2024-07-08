@@ -16,7 +16,7 @@ alans_colors<-function(n){
 }
 
 #Set working dir----
-#setwd()
+setwd("C:\\Users\\afossa\\OneDrive\\repos\\qgcomp-mice-viz")
 
 #Load metals dataset----
 data("metals", package="qgcomp")
@@ -93,7 +93,7 @@ fill_pal<-c('Bootstrap 95% CI'='lightgrey')
 #   )+
 #   theme_classic()
 
-all_predictions_df %>% 
+pred_plot_mice<-all_predictions_df %>% 
   ggplot()+
   geom_ribbon(
     aes(x=quantile,ymin=ll.simul,ymax=ul.simul,group = imputation,fill='Bootstrap 95% CI'),
@@ -115,3 +115,10 @@ all_predictions_df %>%
   )+
   theme_classic()
 
+pred_plot_mice %>% 
+  ggsave(
+    filename="output\\pred_plot_mice.tiff",
+    plot=.,
+    dpi=200,
+    scale=1
+  )
